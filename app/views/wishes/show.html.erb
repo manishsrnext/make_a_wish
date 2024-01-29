@@ -1,0 +1,15 @@
+<h1>Add product to your wish</h1>
+<% @products.each do |product| %>
+  <div>
+    <div><%= product.product_name %></div>
+    <% if @wish.wish_products.include?(product) %>
+      <button data-controller="wish" data-action="click->wish#addToWishlist" data-wish-id="<%= @wish.id %>" data-product-id="<%= product.id %>">
+        Remove Product
+      </button>
+    <% else %>
+      <button data-controller="wish" data-action="click->wish#removeFromWishlist" data-wish-id="<%= @wish.id %>" data-product-id="<%= product.id %>">
+        Add Product
+      </button>
+    <% end %>
+  </div>
+<% end %>

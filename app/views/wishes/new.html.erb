@@ -1,0 +1,17 @@
+<h1>New wish</h1>
+
+<%= form_with model: @wish do |form| %>
+  <div>
+    <%= form.label :sender_id %><br>
+    <%= form.text_field :sender_id %>
+  </div>
+
+  <div>
+    <%= form.label :receiver_id %><br>
+    <%= form.text_area :receiver_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

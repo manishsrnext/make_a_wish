@@ -1,0 +1,14 @@
+
+
+<h1>wishes</h1>
+
+<ul>
+  <% @wishes.each do |wish| %>
+     <li>
+      <%= link_to wish.sender_id, wish %>
+    </li>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Wish", new_wish_path %>
