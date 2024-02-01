@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
 
   def index
-    byebug
     @products = Product.all
     @products = @products.where("product_name LIKE ?", "#{params[:search_params]}%") if params[:search_params].present?
   
