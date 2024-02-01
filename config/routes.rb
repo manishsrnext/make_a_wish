@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   resources :products
   resources :wishes do
-    post :add_product, on: :member
+    get :get_wish_products
   end
 
+  post '/add_product', to: 'wishes#add_product'
+
 end
+

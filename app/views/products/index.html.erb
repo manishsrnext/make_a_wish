@@ -1,13 +1,100 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div> 
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid ">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="/" class="btn btn-primary mr-2">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/wishes" class="btn btn-primary mr-2">My Wish</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="" class="btn btn-primary mr-2">My profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/products/new" class="btn btn-primary mr-2">Create Product</a>
+          </li>
+        
+        </ul>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  
+
+  <div class="row">
+    <div class="col-4">
+      <div id="list-example" class="list-group">
+        <%= form_with(url: products_path, method: :get, class: "form-row") do |form| %>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :max_price, "Max Price" %>
+            <%= form.number_field :max_price, class: "form-control", placeholder: "Max Price" %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :min_price, "Min Price" %>
+            <%= form.number_field :min_price, class: "form-control", placeholder: "Min Price" %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :under_500, "Under 500" %>
+            <%= form.check_box :under_500, class: "form-check-input" %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :between_500_1000, "500-1000" %>
+            <%= form.check_box :between_500_1000, class: "form-check-input" %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <%= form.label :between_1000_5000, "1000-5000" %>
+            <%= form.check_box :between_1000_5000, class: "form-check-input" %>
+          </div>
+
+          <div class="col-md-12">
+            <%= form.submit "Filter", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+
+     <div class="col-8">
+      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+        <h1>Products</h1>
+        <ul class="list-group">
+          <% @products.each do |product| %>
+            <li class="list-group-item">
+            <%= render partial: 'product', locals: { product: product } %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div>
-    <a href="/products/new" class="btn btn-primary mr-2">Add Product</a>
-    <a href="/wishes/new" class="btn btn-primary mr-2">Create Wish</a>
-    <a href="/wish_requests/new" class="btn btn-primary mr-2">Wish Request</a>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
-<h1>Products</h1>
-<ul>
-  <% @products.each do |product| %>
-    <%= render partial: 'product', locals: { product: product } %>
-  <% end %>
-</ul>

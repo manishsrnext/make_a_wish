@@ -76,3 +76,5 @@ end
 gem "byebug"
 gem "letter_opener"
 gem 'requestjs-rails'
+gem 'rack-cors'
+gem 'bootstrap', '~> 5.1.3'

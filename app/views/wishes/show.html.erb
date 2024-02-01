@@ -1,5 +1,5 @@
 <h1>Add product to your wish</h1>
-<% @products.each do |product| %>
+<% @wish.products.each do |product| %>
   <div>
     <div><%= product.product_name %></div>
     <% if @wish.wish_products.include?(product) %>

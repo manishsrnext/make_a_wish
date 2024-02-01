@@ -3,9 +3,11 @@
 
 <p><%= @product.price %></p>
 <p><%= @product.description %></p>
- <% if @product.image.attached? %>
-      <div>
-        <%= image_tag url_for(@product.image), alt: @product.product_name, class: 'product-image'%>
-      </div>
-    <% end %>
-<%= link_to "New product", new_product_path %>
+<% if @product.image.attached? %>
+  <div>
+    <%= image_tag url_for(@product.image), alt: @product.product_name, class: 'product-image'%>
+  </div>
+<% end %>
+<button data-controller="wish" data-action="click->wish#addToWishlist" data-product-id="<%= @product.id %>">
+        Add Product
+</button>

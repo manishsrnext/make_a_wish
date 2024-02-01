@@ -13,5 +13,5 @@ eagerLoadControllersFrom("controllers", application)
 // lazyLoadControllersFrom("controllers", application)
 
 
-import ShowController from "./show_controller"
-application.register("show", ShowController)
+import ShowController from "./wish_controller"
+application.register("wish", ShowController)

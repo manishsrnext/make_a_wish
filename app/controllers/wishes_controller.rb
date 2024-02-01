@@ -1,12 +1,11 @@
 class WishesController < ApplicationController
-
+  
   def index
-    @wishes = Wish.all
+    @wish = Wish.last
   end
 
   def show
     @wish = Wish.find(params[:id])
-    @products = Product.all 
   end
 
   def new
@@ -14,12 +13,7 @@ class WishesController < ApplicationController
   end
 
   def create
-    @wish = Wish.new(wish_params)
-    if @wish.save
-      redirect_to @wish
-    else
-      render :new, status: :unprocessable_entity
-    end
+    create_wish
   end
 
   def edit
@@ -44,11 +38,33 @@ class WishesController < ApplicationController
   end
 
   def add_product
-    WishProduct.create(product_id: params[:product_id], wish_id: params[:id])
+    if params[:wish_id].present?
+      WishProduct.create(product_id: params[:wish][:product_id], wish_id: params[:wish][:wish_id])
+      respond_to do |format|
+        format.json { render json: { id: @wish.id } }
+      end
+    else
+      create_wish
+      WishProduct.create(product_id: params[:wish][:product_id], wish_id: @wish.id )
+      respond_to do |format|
+        format.json { render json: { id: @wish.id } }
+      end
+    end
   end
 
+  def get_wish_products
+    @wish.products
+  end
+
+  # def send_wish_to_user
+  #   @wish.products
+  # end
+
   private
-    def wish_params
-      params.require(:wish).permit(:sender_id, :receiver_id)
+  
+    def create_wish
+      @wish = Wish.new(sender_id: 1, receiver_id: 2)
+      @wish.status = "pending"
+      @wish.save
     end
 end
