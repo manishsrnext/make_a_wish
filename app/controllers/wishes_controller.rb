@@ -38,19 +38,38 @@ class WishesController < ApplicationController
   end
 
   def add_product
-    if params[:wish_id].present?
-      WishProduct.create(product_id: params[:wish][:product_id], wish_id: params[:wish][:wish_id])
+    @wish = Wish.last
+    if @wish.present?
+      WishProduct.create(product_id: params[:id],  wish_id: @wish.id )
       respond_to do |format|
-        format.json { render json: { id: @wish.id } }
+        format.js { render layout: false, content_type: 'text/javascript' }
       end
     else
       create_wish
       WishProduct.create(product_id: params[:wish][:product_id], wish_id: @wish.id )
       respond_to do |format|
-        format.json { render json: { id: @wish.id } }
+        format.js { render js: "alert('not able to add product to wish');" }
       end
     end
   end
+
+
+  def remove_product
+    @product = Product.find_by_id(params[:id])
+    @wish = Wish.last
+  
+    if @product.present?
+      @wish.products.delete(@product)
+      respond_to do |format|
+        format.js { render layout: false, content_type: 'text/javascript' }
+      end
+    else
+      respond_to do |format|
+        format.js { render js: "alert('Product or wish not found');" }
+      end
+    end
+  end
+  
 
   def get_wish_products
     @wish.products
@@ -63,7 +82,7 @@ class WishesController < ApplicationController
   private
   
     def create_wish
-      @wish = Wish.new(sender_id: 1, receiver_id: 2)
+      @wish = Wish.new(sender_id: 1)
       @wish.status = "pending"
       @wish.save
     end

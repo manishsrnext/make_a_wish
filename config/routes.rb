@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   post '/add_product', to: 'wishes#add_product'
+  delete '/remove_product', to: 'wishes#remove_product'
 
 end
 

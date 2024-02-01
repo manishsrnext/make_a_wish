@@ -1,13 +1,20 @@
-<h1>product</h1>
-<h1><%= @product.product_name %></h1>
+<div class="row" style="overflow-x: hidden;">
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <%= render partial: 'product', locals: { product: @product } %>
+        <p class="card-text"><%= @product.description %></p>
+        <%= render partial: 'select' %>
+      </div>
+      <% if not @wish.products.include?(@product) %>
+        <%= button_to 'Add Product', 
+                      add_product_path(id: @product.id), 
+                      method: :post, 
+                      remote: true, 
+                      data: { controller: "wish", action: "click->wish#addProduct" }, 
+                      class: "btn btn-primary btn-block" %>
+      <% end %>
 
-<p><%= @product.price %></p>
-<p><%= @product.description %></p>
-<% if @product.image.attached? %>
-  <div>
-    <%= image_tag url_for(@product.image), alt: @product.product_name, class: 'product-image'%>
+    </div>
   </div>
-<% end %>
-<button data-controller="wish" data-action="click->wish#addToWishlist" data-product-id="<%= @product.id %>">
-        Add Product
-</button>
+</div>

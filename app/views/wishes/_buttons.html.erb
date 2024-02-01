@@ -1,0 +1,20 @@
+<div class="card-footer">
+  <% if products.include?(product) %>
+        <%= button_to 'Remove Product', 
+                      remove_product_path(id: product.id), 
+                      method: :delete, 
+                      remote: true, 
+                      data: { controller: "wish", action: "click->wish#removeProduct" }, 
+                      class: "btn btn-primary btn-block" %>
+
+  <% else %>
+      <%= button_to 'Remove Product', 
+                      add_product_path(id: product.id), 
+                      method: :post, 
+                      remote: true, 
+                      data: { controller: "wish", action: "click->wish#addProduct" }, 
+                      class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
+
+

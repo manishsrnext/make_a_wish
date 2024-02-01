@@ -1,19 +1,15 @@
-<h1>Add product to your wish</h1>
-
-<% @wish.products.each do |product| %>
-  <div>
-    <li class="list-group-item">
-      <%= render partial: 'products/product', locals: { product: product } %>
-      <p class="mb-0"> <%= product.description %></p>
-    </li>
-    <% if @wish.products.include?(product) %>
-      <button data-controller="wish" data-action="click->wish#removeFromWishlist" data-wish-id="<%= @wish.id %>" data-product-id="<%= product.id %>">
-        Remove Product
-      </button>
-    <% else %>
-      <button data-controller="wish" data-action="click->wish#addToWishlist" data-wish-id="<%= @wish.id %>" data-product-id="<%= product.id %>">
-        Add Product
-      </button>
-    <% end %>
-  </div>
-<% end %>
+<div class="row" style="overflow-x: hidden;">
+  <h1>My wish</h1>
+  <% @wish.products.each do |product| %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <%= render partial: 'products/product', locals: { product: product } %>
+          <p class="card-text"><%= product.description %></p>
+          <%= render partial: 'products/select' %>
+        </div>
+        <%= render partial: 'buttons', locals: { products: @wish.products, product: product } %>
+      </div>
+    </div>
+  <% end %>
+</div>

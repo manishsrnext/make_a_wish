@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
   
   
   def show
+    @wish = Wish.last
     @product = Product.find(params[:id])
   end
 

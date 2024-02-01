@@ -1,13 +1,11 @@
-<li class="list-group-item">
-  <%= link_to product_path(product), class: 'text-decoration-none text-dark' do %>
-    <% if product.image.attached? %>
-      <div class="d-flex align-items-center">
-        <%= image_tag url_for(product.image), alt: product.product_name, class: 'product-image mr-3'%>
+    <%= link_to product_path(product), class: 'text-decoration-none text-dark' do %>
+      <% if product.image.attached? %>
+        <picture>
+          <%= image_tag url_for(product.image), alt: product.product_name, class: 'img-fluid img-thumbnail'%>
+        </picture>
+      <% end %>
+      <div>
+        <h5 class="card-title"><%= product.product_name %></h5>
+        <h5 class="card-title"><%= product.price %></h5>
       </div>
     <% end %>
-    <div>
-      <p class="mb-0"><strong><%= product.product_name %>,</strong></p>
-      <p class="mb-0"> <%= product.price %></p>
-    </div>
-  <% end %>
-</li>

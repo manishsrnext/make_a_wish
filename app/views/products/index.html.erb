@@ -1,4 +1,4 @@
-<div> 
+<div style ='overflow-x: hidden;'> 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid ">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -68,17 +68,13 @@
     </div>
     
 
-     <div class="col-8">
-      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+    <div class="col-8">
         <h1>Products</h1>
         <ul class="list-group">
           <% @products.each do |product| %>
-            <li class="list-group-item">
             <%= render partial: 'product', locals: { product: product } %>
-          </li>
           <% end %>
         </ul>
-      </div>
     </div>
   </div>
 
